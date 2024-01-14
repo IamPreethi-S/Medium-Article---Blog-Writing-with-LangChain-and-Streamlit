@@ -6,8 +6,10 @@ from langchain.chains import LLMChain, SequentialChain
 from langchain.memory import ConversationBufferMemory
 from langchain.utilities import WikipediaAPIWrapper 
 
+#insert your openai - api key here
 os.environ['OPENAI_API_KEY'] = ''
 
+#streamlit for UI
 st.title('🖥️🤔 Medium Article Blog Assistant')
 st.image('./medium.png')
 prompt = st.text_input('Plug in your prompt here')
@@ -28,14 +30,14 @@ article_template = PromptTemplate(
 title_memory = ConversationBufferMemory(input_key='topic', memory_key='chat_history')
 article_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
 
-# Llms
+# Llms creation
 llm = OpenAI(temperature=0.8) 
 title_chain = LLMChain(llm=llm, prompt=title_template, verbose=True, output_key='title', memory=title_memory)
 article_chain = LLMChain(llm=llm, prompt=article_template, verbose=True, output_key='article', memory=article_memory)
 
 wiki = WikipediaAPIWrapper()
 
-# Show stuff to the screen if there's a prompt
+# Show the generated article with title on the screen if there's a prompt 
 if prompt: 
     title = title_chain.run(prompt)
     wiki_research = wiki.run(prompt) 
