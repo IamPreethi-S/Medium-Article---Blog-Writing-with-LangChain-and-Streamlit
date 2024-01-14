@@ -8,7 +8,7 @@ from langchain.utilities import WikipediaAPIWrapper
 
 os.environ['OPENAI_API_KEY'] = ''
 
-st.title('🦜🔗 Medium Article Blog Assistant')
+st.title('🖥️🤔 Medium Article Blog Assistant')
 st.image('./medium.png')
 prompt = st.text_input('Plug in your prompt here')
 
